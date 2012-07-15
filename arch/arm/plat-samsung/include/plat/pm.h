@@ -14,7 +14,10 @@
  * called from board at initialisation time to setup the power
  * management
 */
-
+#ifdef CONFIG_S5P_IDLE2
+#include <linux/wakelock.h>
+#include <mach/cpuidle.h>
+#endif /* CONFIG_S5P_IDLE2 */
 #include <linux/irq.h>
 
 struct sys_device;
@@ -54,6 +57,8 @@ extern unsigned char pm_uart_udivslot;  /* true to save UART UDIVSLOT */
 /* from sleep.S */
 
 extern int  s3c_cpu_save(unsigned long *saveblk, long);
+extern int  s3c_idle2_cpu_save(unsigned long *saveblk, long);
+
 extern void s3c_cpu_resume(void);
 
 extern void s3c2410_cpu_suspend(void);
